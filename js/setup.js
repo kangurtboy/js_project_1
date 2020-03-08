@@ -10,6 +10,28 @@ function getRandomValue(arr) {
 	return randomValue;
 }
 
+var vizards = [
+	{
+		name: getRandomValue(names) + ' ' + getRandomValue(surnames),
+		coatColor: getRandomValue(coatColors),
+		eyesColor: getRandomValue(eyesColors)
+	},
+	{
+		name: getRandomValue(names) + ' ' + getRandomValue(surnames),
+		coatColor: getRandomValue(coatColors),
+		eyesColor: getRandomValue(eyesColors)
+	},
+	{
+		name: getRandomValue(names) + ' ' + getRandomValue(surnames),
+		coatColor: getRandomValue(coatColors),
+		eyesColor: getRandomValue(eyesColors)
+	},
+	{
+		name: getRandomValue(names) + ' ' + getRandomValue(surnames),
+		coatColor: getRandomValue(coatColors),
+		eyesColor: getRandomValue(eyesColors)
+	}
+];
 /* Задача
 В файле setup.js
 1. Покажите блок .setup, убрав в JS-коде у него класс .hidden.
