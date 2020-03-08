@@ -5,6 +5,11 @@ var surnames = ['да', 'Марья', 'Верон', 'Мирабелла', 'Ва�
 var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
+function getRandomValue(arr) {
+	let randomValue = arr[Math.floor(Math.random() * arr.length)];
+	return randomValue;
+}
+
 /* Задача
 В файле setup.js
 1. Покажите блок .setup, убрав в JS-коде у него класс .hidden.
