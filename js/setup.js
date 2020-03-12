@@ -152,9 +152,6 @@ setupOpen.addEventListener("focus", function(e) {
 setupClose.addEventListener("focus", function(e) {
   onSetupEnter(setupClose, onSetupClose);
 });
-// setupOpen.addEventListener('focus', function (e) {
-// 	console.log(e);
-// })
 
 /* Задача
 В файлеsetup.js опишите следующие сценарии взаимодействия пользователя с сайтом:
