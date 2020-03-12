@@ -1,51 +1,80 @@
-var setupBlock = document.querySelector('.setup');
-setupBlock.classList.remove('hidden');
-var setupSimilar = document.querySelector('.setup-similar');
-setupSimilar.classList.remove('hidden');
-var vizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-var vizardList = document.querySelector('.setup-similar-list');
-var names = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон']
-var surnames = ['да', 'Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+var setupBlock = document.querySelector(".setup");
+setupBlock.classList.remove("hidden");
+var setupSimilar = document.querySelector(".setup-similar");
+setupSimilar.classList.remove("hidden");
+var vizardTemplate = document
+  .querySelector("#similar-wizard-template")
+  .content.querySelector(".setup-similar-item");
+var vizardList = document.querySelector(".setup-similar-list");
+var names = [
+  "Иван",
+  "Хуан",
+  "Себастьян",
+  "Мария",
+  "Кристоф",
+  "Виктор",
+  "Юлия",
+  "Люпита",
+  "Вашингтон"
+];
+var surnames = [
+  "да",
+  "Марья",
+  "Верон",
+  "Мирабелла",
+  "Вальц",
+  "Онопко",
+  "Топольницкая",
+  "Нионго",
+  "Ирвинг"
+];
+var coatColors = [
+  "rgb(101, 137, 164)",
+  "rgb(241, 43, 107)",
+  "rgb(146, 100, 161)",
+  "rgb(56, 159, 117)",
+  "rgb(215, 210, 55)",
+  "rgb(0, 0, 0)"
+];
+var eyesColors = ["black", "red", "blue", "yellow", "green"];
 
 function getRandomValue(arr) {
-	let randomValue = arr[Math.floor(Math.random() * arr.length)];
-	return randomValue;
+  let randomValue = arr[Math.floor(Math.random() * arr.length)];
+  return randomValue;
 }
 
 var vizards = [
-	{
-		name: getRandomValue(names) + ' ' + getRandomValue(surnames),
-		coatColor: getRandomValue(coatColors),
-		eyesColor: getRandomValue(eyesColors)
-	},
-	{
-		name: getRandomValue(names) + ' ' + getRandomValue(surnames),
-		coatColor: getRandomValue(coatColors),
-		eyesColor: getRandomValue(eyesColors)
-	},
-	{
-		name: getRandomValue(names) + ' ' + getRandomValue(surnames),
-		coatColor: getRandomValue(coatColors),
-		eyesColor: getRandomValue(eyesColors)
-	},
-	{
-		name: getRandomValue(names) + ' ' + getRandomValue(surnames),
-		coatColor: getRandomValue(coatColors),
-		eyesColor: getRandomValue(eyesColors)
-	}
+  {
+    name: getRandomValue(names) + " " + getRandomValue(surnames),
+    coatColor: getRandomValue(coatColors),
+    eyesColor: getRandomValue(eyesColors)
+  },
+  {
+    name: getRandomValue(names) + " " + getRandomValue(surnames),
+    coatColor: getRandomValue(coatColors),
+    eyesColor: getRandomValue(eyesColors)
+  },
+  {
+    name: getRandomValue(names) + " " + getRandomValue(surnames),
+    coatColor: getRandomValue(coatColors),
+    eyesColor: getRandomValue(eyesColors)
+  },
+  {
+    name: getRandomValue(names) + " " + getRandomValue(surnames),
+    coatColor: getRandomValue(coatColors),
+    eyesColor: getRandomValue(eyesColors)
+  }
 ];
 function renderVizard() {
-	var vizardName = vizardTemplate.querySelector('.setup-similar-label');
-	var vizardCoat = vizardTemplate.querySelector('.wizard-coat');
-	var vizardEyes = vizardTemplate.querySelector('.wizard-eyes');
-	for (var i = 0; i < vizards.length; i++){
-		vizardName.textContent = vizards[i].name;
-		vizardCoat.style.fill = vizards[i].coatColor;
-		vizardEyes.style.fill = vizards[i].eyesColor;
-		vizardList.appendChild(vizardTemplate.cloneNode(true));
-	}
+  var vizardName = vizardTemplate.querySelector(".setup-similar-label");
+  var vizardCoat = vizardTemplate.querySelector(".wizard-coat");
+  var vizardEyes = vizardTemplate.querySelector(".wizard-eyes");
+  for (var i = 0; i < vizards.length; i++) {
+    vizardName.textContent = vizards[i].name;
+    vizardCoat.style.fill = vizards[i].coatColor;
+    vizardEyes.style.fill = vizards[i].eyesColor;
+    vizardList.appendChild(vizardTemplate.cloneNode(true));
+  }
 }
 renderVizard();
 /* Задача
@@ -89,22 +118,44 @@ o Цвет мантии coatColor задайте как цвет заливки 
 o Цвет глаз eyesColor задайте как цвет заливки fill в стилях элемента .wizard-eyes.
 4. Отрисуйте сгенерированные DOM-элементы в блок .setup-similar-list. Для вставки элементов используйте DocumentFragment.
 5. Покажите блок .setup-similar, удалив у него CSS-класс hidden. */
-var setupClose = document.querySelector('.setup-close');
-var setupOpen = document.querySelector('.setup-open');
-setupBlock.classList.add('hidden');
-var onSetupOpen = function () {
-	setupBlock.classList.remove('hidden');
+var setupClose = document.querySelector(".setup-close");
+var setupOpen = document.querySelector(".setup-open-icon");
+setupBlock.classList.add("hidden");
+var onSetupOpen = function() {
+  //открытие окно персонажа
+  setupBlock.classList.remove("hidden");
 };
-var onSetupClose = function () {
-	setupBlock.classList.add('hidden');
-}
-setupOpen.addEventListener('click', onSetupOpen);
-setupClose.addEventListener('click', onSetupClose);
-document.body.addEventListener('keydown', function (e) {
-	if (!setupBlock.classList.contains('hidden') && e.keyCode === 27) {
-		onSetupClose();
-	}
-})
+var onSetupClose = function() {
+  //закрытие окно персонажа
+  setupBlock.classList.add("hidden");
+};
+var onSetupEnter = function(element, func) {
+  //универсалная функция при нажании кнопки enter;
+  element.addEventListener("keydown", function(e) {
+    if (e.keyCode === 13) {
+      func();
+    }
+  });
+};
+setupOpen.addEventListener("click", onSetupOpen);
+setupClose.addEventListener("click", onSetupClose);
+document.body.addEventListener("keydown", function(e) {
+  //закрытие окно персонажа по нажание клавиши Esc
+  if (!setupBlock.classList.contains("hidden") && e.keyCode === 27) {
+    onSetupClose();
+  }
+});
+setupOpen.addEventListener("focus", function(e) {
+  onSetupEnter(setupOpen, onSetupOpen);
+});
+
+setupClose.addEventListener("focus", function(e) {
+  onSetupEnter(setupClose, onSetupClose);
+});
+// setupOpen.addEventListener('focus', function (e) {
+// 	console.log(e);
+// })
+
 /* Задача
 В файлеsetup.js опишите следующие сценарии взаимодействия пользователя с сайтом:
 1. Открытие/закрытие окна настройки персонажа:
