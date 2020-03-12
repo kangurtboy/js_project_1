@@ -89,10 +89,22 @@ o Цвет мантии coatColor задайте как цвет заливки 
 o Цвет глаз eyesColor задайте как цвет заливки fill в стилях элемента .wizard-eyes.
 4. Отрисуйте сгенерированные DOM-элементы в блок .setup-similar-list. Для вставки элементов используйте DocumentFragment.
 5. Покажите блок .setup-similar, удалив у него CSS-класс hidden. */
-
-
-
-
+var setupClose = document.querySelector('.setup-close');
+var setupOpen = document.querySelector('.setup-open');
+setupBlock.classList.add('hidden');
+var onSetupOpen = function () {
+	setupBlock.classList.remove('hidden');
+};
+var onSetupClose = function () {
+	setupBlock.classList.add('hidden');
+}
+setupOpen.addEventListener('click', onSetupOpen);
+setupClose.addEventListener('click', onSetupClose);
+document.body.addEventListener('keydown', function (e) {
+	if (!setupBlock.classList.contains('hidden') && e.keyCode === 27) {
+		onSetupClose();
+	}
+})
 /* Задача
 В файлеsetup.js опишите следующие сценарии взаимодействия пользователя с сайтом:
 1. Открытие/закрытие окна настройки персонажа:
