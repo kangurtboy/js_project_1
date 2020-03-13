@@ -37,6 +37,7 @@ var coatColors = [
   "rgb(0, 0, 0)"
 ];
 var eyesColors = ["black", "red", "blue", "yellow", "green"];
+var fireballColors = ["#ee4830", "#30a8ee", "#5ce6c0", "#e848d5", "#e6e848"];
 
 function getRandomValue(arr) {
   let randomValue = arr[Math.floor(Math.random() * arr.length)];
@@ -120,6 +121,9 @@ o Цвет глаз eyesColor задайте как цвет заливки fill
 5. Покажите блок .setup-similar, удалив у него CSS-класс hidden. */
 var setupClose = document.querySelector(".setup-close");
 var setupOpen = document.querySelector(".setup-open-icon");
+var mainSetup = setupBlock.querySelector(".setup-player");
+var setupFireball = setupBlock.querySelector('[name="fireball-color"]');
+console.log(setupFireball)
 setupBlock.classList.add("hidden");
 var onSetupOpen = function() {
   //открытие окно персонажа
@@ -137,6 +141,17 @@ var onSetupEnter = function(element, func) {
     }
   });
 };
+var onMainSetupChanging = function(e) {
+  //изменения главного персонажа;
+  if (e.target.className.baseVal === "wizard-coat") {
+    e.target.style.fill = getRandomValue(coatColors);
+  } else if (e.target.className.baseVal === "wizard-eyes") {
+    e.target.style.fill = getRandomValue(eyesColors);
+  } else if (e.target.className === 'setup-fireball') {
+	  setupFireball.value = getRandomValue(fireballColors);
+	  e.target.style.backgroundColor = setupFireball.value;
+  }
+};
 setupOpen.addEventListener("click", onSetupOpen);
 setupClose.addEventListener("click", onSetupClose);
 document.body.addEventListener("keydown", function(e) {
@@ -152,6 +167,7 @@ setupOpen.addEventListener("focus", function(e) {
 setupClose.addEventListener("focus", function(e) {
   onSetupEnter(setupClose, onSetupClose);
 });
+mainSetup.addEventListener("click", onMainSetupChanging);
 
 /* Задача
 В файлеsetup.js опишите следующие сценарии взаимодействия пользователя с сайтом:
