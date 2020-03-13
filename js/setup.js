@@ -122,34 +122,37 @@ o Цвет глаз eyesColor задайте как цвет заливки fill
 var setupClose = document.querySelector(".setup-close");
 var setupOpen = document.querySelector(".setup-open-icon");
 var mainSetup = setupBlock.querySelector(".setup-player");
-var setupFireball = setupBlock.querySelector('[name="fireball-color"]');
-console.log(setupFireball)
 setupBlock.classList.add("hidden");
 var onSetupOpen = function() {
-  //открытие окно персонажа
-  setupBlock.classList.remove("hidden");
+	//открытие окно персонажа
+	setupBlock.classList.remove("hidden");
 };
 var onSetupClose = function() {
-  //закрытие окно персонажа
-  setupBlock.classList.add("hidden");
+	//закрытие окно персонажа
+	setupBlock.classList.add("hidden");
 };
 var onSetupEnter = function(element, func) {
-  //универсалная функция при нажании кнопки enter;
-  element.addEventListener("keydown", function(e) {
-    if (e.keyCode === 13) {
-      func();
-    }
-  });
+	//универсалная функция при нажании кнопки enter;
+	element.addEventListener("keydown", function(e) {
+		if (e.keyCode === 13) {
+			func();
+		}
+	});
 };
 var onMainSetupChanging = function(e) {
-  //изменения главного персонажа;
-  if (e.target.className.baseVal === "wizard-coat") {
-    e.target.style.fill = getRandomValue(coatColors);
-  } else if (e.target.className.baseVal === "wizard-eyes") {
-    e.target.style.fill = getRandomValue(eyesColors);
+	//изменения главного персонажа;
+	var fireballInput = setupBlock.querySelector('[name="fireball-color"]');
+	var coatColorInput = setupBlock.querySelector('[name ="coat-color"]');
+	var eyesColorInput = setupBlock.querySelector('[name="eyes-color"]')
+	if (e.target.className.baseVal === "wizard-coat") {
+	  coatColorInput.value = getRandomValue(coatColors)
+    e.target.style.fill = coatColorInput.value;
+	} else if (e.target.className.baseVal === "wizard-eyes") {
+		eyesColorInput.value = getRandomValue(eyesColors);
+    e.target.style.fill = eyesColorInput.value ;
   } else if (e.target.className === 'setup-fireball') {
-	  setupFireball.value = getRandomValue(fireballColors);
-	  e.target.style.backgroundColor = setupFireball.value;
+	  fireballInput.value = getRandomValue(fireballColors);
+	  e.target.style.backgroundColor = fireballInput.value;
   }
 };
 setupOpen.addEventListener("click", onSetupOpen);
