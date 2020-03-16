@@ -5,6 +5,11 @@
   var setupOpen = document.querySelector(".setup-open-icon");
   var mainSetup = setupBlock.querySelector(".setup-player");
   setupBlock.classList.add("hidden");
+  var setupUserIcon = setupBlock.querySelector("[type='file']");
+	var draggable = false;
+	window.setupUserIcon = setupUserIcon
+
+
   var onSetupOpen = function() {
     //открытие окно персонажа
     setupBlock.classList.remove("hidden");
@@ -20,7 +25,29 @@
         func();
       }
     });
-  };
+	};
+	var onSetupMove = function (evt) {
+		evt.preventDefault();
+	  var startCoords = {
+		  x: evt.clientX,
+		  y: evt.clientY
+		};
+		console.log(startCoords);
+		document.addEventListener('mousemove', function (moveEvent) {
+			var shift = {
+				x: startCoords.x - moveEvent.clientX,
+				y: startCoords.y - moveEvent.clientY
+
+			}
+			moveEvent.preventDefault();
+			console.log(shift)
+		})
+	  
+};
+	setupBlock.classList.remove("hidden");
+
+	setupUserIcon.addEventListener("mousedown", onSetupMove);
+	
 
   setupOpen.addEventListener("click", onSetupOpen);
   setupClose.addEventListener("click", onSetupClose);
