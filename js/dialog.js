@@ -6,9 +6,8 @@
   var mainSetup = setupBlock.querySelector(".setup-player");
   setupBlock.classList.add("hidden");
   var setupUserIcon = setupBlock.querySelector("[type='file']");
-	var draggable = false;
-	window.setupUserIcon = setupUserIcon
-
+  var draggable = false;
+  window.setupUserIcon = setupUserIcon;
 
   var onSetupOpen = function() {
     //открытие окно персонажа
@@ -16,6 +15,13 @@
   };
   var onSetupClose = function() {
     //закрытие окно персонажа
+    var defultCoords = {
+      //координаты по умолчание
+      x: "calc(50% - 400px)",
+      y: "80px"
+    };
+    setupBlock.style.left = defultCoords.x;
+    setupBlock.style.top = defultCoords.y;
     setupBlock.classList.add("hidden");
   };
   var onSetupEnter = function(element, func) {
@@ -25,29 +31,33 @@
         func();
       }
     });
-	};
-	var onSetupMove = function (evt) {
-		evt.preventDefault();
-	  var startCoords = {
-		  x: evt.clientX,
-		  y: evt.clientY
-		};
-		console.log(startCoords);
-		document.addEventListener('mousemove', function (moveEvent) {
-			var shift = {
-				x: startCoords.x - moveEvent.clientX,
-				y: startCoords.y - moveEvent.clientY
+  };
+  var onMousedown = function(evt) {
+    //drag&drop;
+    draggable = false;
+    var startCoords = {
+      x: evt.offsetX + setupUserIcon.offsetParent.offsetLeft,
+      y: evt.offsetY + setupUserIcon.offsetParent.offsetTop
+    };
 
-			}
-			moveEvent.preventDefault();
-			console.log(shift)
-		})
-	  
-};
-	setupBlock.classList.remove("hidden");
-
-	setupUserIcon.addEventListener("mousedown", onSetupMove);
-	
+    function onMosemove(moveEvent) {
+      draggable = true;
+      setupBlock.style.left = moveEvent.clientX - startCoords.x + "px";
+      setupBlock.style.top = moveEvent.clientY - startCoords.y + "px";
+    }
+    function onMouseup(e) {
+      setupUserIcon.removeEventListener("mousedown", onmousedown);
+      document.removeEventListener("mousemove", onMosemove);
+      setupUserIcon.addEventListener("click", function(e) {
+        if (draggable) {
+          e.preventDefault();
+        }
+      });
+    }
+    setupUserIcon.addEventListener("mouseup", onMouseup);
+    document.addEventListener("mousemove", onMosemove);
+  };
+  setupUserIcon.addEventListener("mousedown", onMousedown);
 
   setupOpen.addEventListener("click", onSetupOpen);
   setupClose.addEventListener("click", onSetupClose);
