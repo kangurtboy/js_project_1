@@ -561,10 +561,8 @@ input[type=radio]:checked + .review-mark-label {
   width: 800px;
 
   position: absolute;
-  left: 50%;
+  left: calc(50% - 400px);
   top: 80px;
-  transform: translateX(-50%);
-
   background: #89a1fd;
   box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
