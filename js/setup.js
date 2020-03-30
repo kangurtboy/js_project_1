@@ -6,19 +6,18 @@ var vizardTemplate = document
   .content.querySelector(".setup-similar-item");
 var vizardList = document.querySelector(".setup-similar-list");
 
-function renderVizard() {
+ window.renderVizard =  function () {
 	//отрисовка персонажей
   var vizardName = vizardTemplate.querySelector(".setup-similar-label");
   var vizardCoat = vizardTemplate.querySelector(".wizard-coat");
   var vizardEyes = vizardTemplate.querySelector(".wizard-eyes");
-  for (var i = 0; i < window.data.vizards.length; i++) {
+  for (var i = 0; i < 4; i++) {
     vizardName.textContent = window.data.vizards[i].name;
-    vizardCoat.style.fill = window.data.vizards[i].coatColor;
-    vizardEyes.style.fill = window.data.vizards[i].eyesColor;
+    vizardCoat.style.fill = window.data.vizards[i].colorCoat;
+    vizardEyes.style.fill = window.data.vizards[i].colorEyes;
     vizardList.appendChild(vizardTemplate.cloneNode(true));
   }
 }
-renderVizard();
 
 var onMainSetupChanging = function(e) {
   //изменения главного персонажа;
