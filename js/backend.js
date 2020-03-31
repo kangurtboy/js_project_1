@@ -2,6 +2,7 @@
 	window.backend = {};
 	window.data = {};
 	window.data.vizards = [];
+	var serverStatus = document.querySelector('.server-status');
 	window.backend.load = function () {
 		//загрузка данных с сервера
 		var xhr = new XMLHttpRequest();
@@ -16,6 +17,7 @@
 	window.backend.load()
 	function onLoad(data) {
 		window.data.vizards = data;
+		serverStatus.classList.add('hidden');
 		window.renderVizard();
 	};
 })()

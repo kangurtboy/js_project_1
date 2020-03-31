@@ -731,6 +731,10 @@ input[type=radio]:checked + .review-mark-label {
 
   margin-left: 20px;
 }
+.server-status{
+	text-align: center;
+	color: #fff;
+}
 
 .setup-similar-list {
   display: flex;
