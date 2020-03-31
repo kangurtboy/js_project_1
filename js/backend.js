@@ -9,9 +9,16 @@
 		xhr.responseType = 'json';
 		xhr.timeout = 10000;
 		xhr.open('GET', 'https://js.dump.academy/code-and-magick/data');
-		xhr.addEventListener('load', function (e) {
+		xhr.addEventListener('load', function () {
 			onLoad(xhr.response);
 		});
+		xhr.addEventListener('error', function () {
+			onError(xhr.status);
+		});
+		xhr.addEventListener('timeout', function () {
+			serverStatus.classList.remove('hidden');
+			serverStatus.textContent = 'Превышено время подключение к серверу';
+		})
 		xhr.send();
 	};
 	window.backend.load()
@@ -19,5 +26,21 @@
 		window.data.vizards = data;
 		serverStatus.classList.add('hidden');
 		window.renderVizard();
+	};
+	function onError(errorStatus) {
+		serverStatus.classList.remove('hidden');
+		switch (errorStatus) {
+			case 400:
+				serverStatus.textContent = 'Неверны запрос';
+				break;
+			case 401:
+				serverStatus.textContent = 'Ползователь не авторизован';
+				break;
+			case 404:
+				serverStatus.textContent = 'Ничего не найдено';
+				break;
+			default:
+				serverStatus.textContent = 'Ошибка сервера';
+		}
 	};
 })()
