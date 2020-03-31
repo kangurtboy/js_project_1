@@ -2,7 +2,8 @@
 	window.backend = {};
 	window.data = {};
 	window.data.vizards = [];
-	var serverStatus = document.querySelector('.server-status');
+	window.serverStatus = document.querySelector('.server-status');
+	var form = document.querySelector('.setup-wizard-form');
 	window.backend.load = function () {
 		//загрузка данных с сервера
 		var xhr = new XMLHttpRequest();
@@ -21,7 +22,22 @@
 		})
 		xhr.send();
 	};
-	window.backend.load()
+	window.backend.save = function (data) {
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'https://js.dump.academy/code-and-magick');
+		xhr.addEventListener('load', function (e) {
+			window.setupBlock.classList.add('hidden');
+		});
+		xhr.addEventListener('error', function (e) {
+			onError(xhr.status);
+		});
+		xhr.send(new FormData(data));
+	};
+	form.addEventListener('submit', function (e) {
+		window.backend.save(form);
+		e.preventDefault();
+	});
+	window.backend.load();
 	function onLoad(data) {
 		window.data.vizards = data;
 		serverStatus.classList.add('hidden');
@@ -43,4 +59,4 @@
 				serverStatus.textContent = 'Ошибка сервера';
 		}
 	};
-})()
+})();

@@ -1,6 +1,6 @@
 //модул окна настройки персонажа
 (function() {
-  var setupBlock = document.querySelector(".setup");
+ window.setupBlock = document.querySelector(".setup");
   var setupClose = document.querySelector(".setup-close");
   var setupOpen = document.querySelector(".setup-open-icon");
   var mainSetup = setupBlock.querySelector(".setup-player");
