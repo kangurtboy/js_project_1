@@ -15,7 +15,6 @@
 	};
 	window.backend.load()
 	function onLoad(data) {
-		window.data = {};
 		window.data.vizards = data;
 		window.renderVizard();
 	};
