@@ -8,7 +8,7 @@
 		//загрузка данных с сервера
 		var xhr = new XMLHttpRequest();
 		xhr.responseType = 'json';
-		xhr.timeout = 10000;
+		xhr.timeout = 100000;
 		xhr.open('GET', 'https://javascript.pages.academy/code-and-magick/data');
 		xhr.addEventListener('load', function () {
 			onLoad(xhr.response);
@@ -24,7 +24,8 @@
 	};
 	window.backend.save = function (data) {
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', 'https://js.dump.academy/code-and-magick');
+		xhr.open('POST', 'https://javascript.pages.academy/code-and-magick');
+		xhr.timeout = 10000;
 		xhr.addEventListener('load', function (e) {
 			window.setupBlock.classList.add('hidden');
 		});
