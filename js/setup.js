@@ -13,9 +13,8 @@
     eye: vizardTemplate.querySelector(".wizard-eyes"),
     fireballInput: setupBlock.querySelector('[name="fireball-color"]'),
     coatInput: setupBlock.querySelector('[name ="coat-color"]'),
-    eyesInput: setupBlock.querySelector('[name="eyes-color"]')
+	eyesInput: setupBlock.querySelector('[name="eyes-color"]'),
   };
-  var sortedVizards = [];
 	function getRating(vizard) {
 	  //установка рейтинг похожести персонажей
     vizard.rank = 0;
@@ -53,26 +52,23 @@
 
   window.onMainSetupChanging = function(e) {
     //изменения главного персонажа;
-    var fireballInput = setupBlock.querySelector('[name="fireball-color"]');
-    var coatColorInput = setupBlock.querySelector('[name ="coat-color"]');
-    var eyesColorInput = setupBlock.querySelector('[name="eyes-color"]');
     if (e.target.className.baseVal === "wizard-coat") {
-      coatColorInput.value = window.utils.getRandomValue(
+      mainVizard.coatInput.value = window.utils.getRandomValue(
         window.data.coatColors
       );
-		e.target.style.fill = coatColorInput.value;
+		e.target.style.fill = mainVizard.coatInput.value;
 		window.renderVizard();
     } else if (e.target.className.baseVal === "wizard-eyes") {
-      eyesColorInput.value = window.utils.getRandomValue(
+      mainVizard.eyesInput.value = window.utils.getRandomValue(
         window.data.eyesColors
       );
-		e.target.style.fill = eyesColorInput.value;
+		e.target.style.fill = mainVizard.eyesInput.value;
 		window.renderVizard();
     } else if (e.target.className === "setup-fireball") {
-      fireballInput.value = window.utils.getRandomValue(
+      mainVizard.fireballInput.value = window.utils.getRandomValue(
         window.data.fireballColors
       );
-      e.target.style.backgroundColor = fireballInput.value;
+      e.target.style.backgroundColor = mainVizard.fireballInput.value;
     }
   };
 })();
